@@ -1,0 +1,232 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #0d1117;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #0a0e14;
+  border-bottom: 1px solid #1e2533;
+  flex-shrink: 0;
+}
+
+.back {
+  background: transparent;
+  border: 1px solid #1e2533;
+  color: #8b9ab0;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.back:hover { color: #e8dfc8; border-color: #2e3f57; }
+
+.agentInfo { display: flex; align-items: center; gap: 12px; flex: 1; }
+
+.headerAvatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: #1a2233;
+  border: 2px solid #1e2533;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+
+.headerName { font-size: 16px; font-weight: 600; color: #e8dfc8; }
+.headerRole { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+
+.onlineChip {
+  display: flex; align-items: center; gap: 6px;
+  background: #0d1f16;
+  border: 1px solid #1d4d35;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #1d9e75;
+}
+
+.onlineDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #1d9e75;
+}
+
+.chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  gap: 10px;
+  padding: 60px 0;
+}
+
+.welcomeAvatar {
+  font-size: 60px;
+  margin-bottom: 8px;
+}
+
+.welcomeName {
+  font-size: 22px;
+  font-weight: 600;
+  color: #e8dfc8;
+}
+
+.welcomeDesc {
+  font-size: 14px;
+  color: #8b9ab0;
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.welcomeSub {
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 80%;
+  animation: fadeUp 0.2s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user {
+  flex-direction: row-reverse;
+  align-self: flex-end;
+}
+
+.assistant { align-self: flex-start; }
+
+.msgAvatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #1a2233;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.bubble {
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.user .bubble {
+  background: #1e3a5f;
+  border: 1px solid #2e4f7a;
+  color: #e8dfc8;
+  border-top-right-radius: 4px;
+}
+
+.assistant .bubble {
+  background: #111820;
+  border: 1px solid #1e2533;
+  color: #d4cbb5;
+  border-top-left-radius: 4px;
+}
+
+.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 18px;
+}
+
+.typing span {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #4a5568;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.inputArea {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  background: #0a0e14;
+  border-top: 1px solid #1e2533;
+  flex-shrink: 0;
+}
+
+.textarea {
+  flex: 1;
+  background: #111820;
+  border: 1px solid #1e2533;
+  border-radius: 12px;
+  color: #e8dfc8;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: 'Outfit', sans-serif;
+  resize: none;
+  min-height: 48px;
+  max-height: 160px;
+  transition: border 0.2s;
+  line-height: 1.5;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #2e3f57;
+}
+
+.textarea::placeholder { color: #4a5568; }
+
+.textarea:disabled { opacity: 0.5; }
+
+.sendBtn {
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sendBtn:hover:not(:disabled) { opacity: 0.8; }
+.sendBtn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 16px;
+  color: #8b9ab0;
+}
