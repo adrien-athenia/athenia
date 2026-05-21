@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { agents } from "@/lib/agents";
 import styles from "./page.module.css";
 
@@ -50,13 +49,11 @@ export default function Home() {
         className={`${styles.sidebar} ${mobileMenuOpen ? styles.sidebarOpen : ""}`}
       >
         <div className={styles.logoArea}>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/logo-athenia-luxe.png"
             alt="Athenia"
-            width={120}
-            height={120}
             className={styles.logoImg}
-            priority
           />
         </div>
 
