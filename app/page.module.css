@@ -14,6 +14,7 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  z-index: 100;
 }
 
 .logoArea {
@@ -22,10 +23,7 @@
   text-align: center;
 }
 
-.logoIcon {
-  font-size: 28px;
-  margin-bottom: 6px;
-}
+.logoIcon { font-size: 28px; margin-bottom: 6px; }
 
 .logoName {
   font-family: 'Cinzel', serif;
@@ -43,10 +41,7 @@
   margin-top: 2px;
 }
 
-.nav {
-  padding: 12px 0;
-  flex: 1;
-}
+.nav { padding: 12px 0; flex: 1; }
 
 .navItem {
   display: flex;
@@ -60,16 +55,8 @@
   transition: all 0.2s;
 }
 
-.navItem:hover {
-  color: #e8dfc8;
-  background: #111820;
-}
-
-.navItem.active {
-  color: #c9a227;
-  background: #141c28;
-  border-left-color: #c9a227;
-}
+.navItem:hover { color: #e8dfc8; background: #111820; }
+.navItem.active { color: #c9a227; background: #141c28; border-left-color: #c9a227; }
 
 .turboBox {
   margin: 12px;
@@ -94,17 +81,14 @@
   font-weight: 600;
 }
 
-.main {
-  flex: 1;
-  padding: 28px;
-  overflow-y: auto;
-}
+.main { flex: 1; padding: 28px; overflow-y: auto; }
 
 .topBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
+  gap: 12px;
 }
 
 .pageTitle { font-size: 24px; font-weight: 600; color: #e8dfc8; }
@@ -120,6 +104,7 @@
   border-radius: 20px;
   font-size: 12px;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 .btnNew:hover { background: #c9a22718; }
 
@@ -130,6 +115,7 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 15px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .userChip {
@@ -149,135 +135,4 @@
 }
 
 .userName { font-size: 12px; font-weight: 500; color: #e8dfc8; }
-.userRole { font-size: 9px; color: #6b7a8d; }
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 28px;
-}
-
-.statCard {
-  background: #111820;
-  border: 1px solid #1e2533;
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.statIcon {
-  width: 40px; height: 40px;
-  background: #1a2233;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.statNum { font-size: 22px; font-weight: 600; color: #e8dfc8; }
-.statLabel { font-size: 11px; color: #6b7a8d; }
-.statSub { font-size: 10px; color: #1d9e75; margin-top: 2px; }
-
-.agentsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.agentCard {
-  background: #111820;
-  border: 1px solid #1e2533;
-  border-radius: 14px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s;
-  position: relative;
-}
-
-.agentCard:hover {
-  border-color: #2e3f57;
-  background: #141e2d;
-  transform: translateY(-3px);
-}
-
-.toggle {
-  position: absolute;
-  top: 14px; right: 14px;
-  width: 34px; height: 19px;
-  background: #2e3f57;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.toggle::after {
-  content: '';
-  position: absolute;
-  width: 15px; height: 15px;
-  background: #6b7a8d;
-  border-radius: 50%;
-  top: 2px; left: 2px;
-  transition: all 0.2s;
-}
-
-.toggleOn { background: #1d9e75 !important; }
-.toggleOn::after {
-  left: 17px !important;
-  background: white !important;
-}
-
-.agentAvatar {
-  width: 76px; height: 76px;
-  border-radius: 50%;
-  background: #1a2233;
-  border: 2px solid #1e2533;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 34px;
-  margin: 10px 0 12px;
-}
-
-.agentRole {
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-
-.agentName { font-size: 22px; font-weight: 600; color: #e8dfc8; margin-bottom: 8px; }
-.agentDesc { font-size: 11px; color: #6b7a8d; line-height: 1.6; margin-bottom: 14px; flex: 1; }
-
-.agentFooter {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%;
-}
-
-.statusDot {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 11px;
-}
-
-.dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  transition: background 0.3s;
-}
-
-.openBtn {
-  padding: 6px 14px;
-  background: #1a2233;
-  border: 1px solid #2e3f57;
-  color: #c9a227;
-  border-radius: 6px;
-  font-size: 11px;
-  transition: all 0.2s;
-}
-
-.openBtn:hover { background: #c9a22720; border-color: #c9a227; }
+.userRole { font-size: 9px; col
