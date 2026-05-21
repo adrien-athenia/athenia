@@ -1,46 +1,23 @@
-@media (max-width: 768px) {
-  .sidebar {
-    position: fixed !important;
-    left: -250px !important;
-    top: 0;
-    height: 100vh;
-    transition: left 0.3s;
-    z-index: 100;
-    width: 210px;
-  }
-
-  .sidebarOpen { left: 0 !important; }
-  .overlay { display: block; }
-  .hamburger { display: block; }
-  .btnNew { display: none; }
-  .bell { display: none; }
-  .main { padding: 12px; width: 100%; }
-
-  .statsGrid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .statCard { padding: 10px; gap: 8px; }
-  .statIcon { width: 30px; height: 30px; font-size: 14px; }
-  .statNum { font-size: 16px; }
-  .statLabel { font-size: 9px; }
-  .statSub { font-size: 9px; }
-
-  .agentsGrid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px;
-  }
-
-  .agentCard { padding: 12px; }
-  .agentAvatar { width: 50px; height: 50px; font-size: 22px; margin: 6px 0 8px; }
-  .agentRole { font-size: 8px; }
-  .agentName { font-size: 15px; margin-bottom: 4px; }
-  .agentDesc { font-size: 9px; margin-bottom: 8px; }
-  .openBtn { padding: 4px 8px; font-size: 10px; }
-  .pageTitle { font-size: 18px; }
-  .pageSub { font-size: 11px; }
+.dash {
+  display: flex;
+  min-height: 100vh;
+  background: #0d1117;
 }
+
+.sidebar {
+  width: 210px;
+  background: #0a0e14;
+  border-right: 1px solid #1e2533;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+}
+
+.logoArea {
+  padding: 24px 16px 20px;
+  border-bottom: 1px solid #1e2533;
+  text-align: center;
