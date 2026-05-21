@@ -1,180 +1,399 @@
-CORRECTION COMPLÈTE OVERLAY MOBILE + SIDEBAR MOBILE ATHENIA
+* {
+  box-sizing: border-box;
+}
 
-PROBLÈME ACTUEL :
-Sur mobile, tout le dashboard devient noir et inaccessible.
+.dash {
+  display: flex;
+  min-height: 100vh;
+  background: #0d1117;
+  overflow-x: hidden;
+}
 
-CAUSE :
-L’overlay mobile est affiché en permanence.
-La sidebar mobile fonctionne mais l’overlay reste actif même menu fermé.
+.sidebar {
+  width: 210px;
+  background: #0a0e14;
+  border-right: 1px solid #1e2533;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.25s ease;
+}
 
-==================================================
-1. OUVRIR LE BON FICHIER CSS
-==================================================
+.logoArea {
+  padding: 24px 16px;
+  border-bottom: 1px solid #1e2533;
+  text-align: center;
+}
 
-Dans le terminal PowerShell :
+.logoIcon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
 
-notepad app\page.module.css
+.logoName {
+  color: #c9a227;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
 
-==================================================
-2. REMPLACER LE BLOC OVERLAY
-==================================================
+.logoSub {
+  color: #8b7a5a;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
 
-CHERCHER :
+.nav {
+  padding: 12px 0;
+  flex: 1;
+}
 
-.overlay {
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  color: #8b9ab0;
+  cursor: pointer;
+}
+
+.active {
+  color: #c9a227;
+  background: #141c28;
+}
+
+.turboBox {
+  margin: 12px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #12100a;
+  border: 1px solid #3d2f10;
+}
+
+.turboLabel {
+  font-size: 10px;
+  color: #8b7a5a;
+}
+
+.turboTitle {
+  font-size: 18px;
+  color: #c9a227;
+  font-weight: 700;
+}
+
+.turboDesc {
+  font-size: 11px;
+  color: #8b7a5a;
+  margin: 8px 0;
+}
+
+.turboBtn {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #c9a227;
+  color: #0d1117;
+  font-weight: 700;
+}
+
+.main {
+  flex: 1;
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  color: #e8dfc8;
+  font-size: 36px;
+  margin: 0;
+}
+
+.pageSub {
+  color: #6b7a8d;
+  margin-top: 4px;
+}
+
+.topRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btnNew {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid #c9a227;
+  background: transparent;
+  color: #c9a227;
+}
+
+.bell {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #1e2533;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userChip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #111820;
+  border: 1px solid #1e2533;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #c9a227;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.userName {
+  color: #e8dfc8;
+  font-size: 12px;
+}
+
+.userRole {
+  color: #6b7a8d;
+  font-size: 10px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: #111820;
+  border: 1px solid #1e2533;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.statIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #1a2233;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statNum {
+  color: #e8dfc8;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.statLabel {
+  color: #8b9ab0;
+  font-size: 12px;
+}
+
+.statSub {
+  color: #1d9e75;
+  font-size: 11px;
+}
+
+.agentsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.agentCard {
+  background: #111820;
+  border: 1px solid #1e2533;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  position: relative;
+}
+
+.agentAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #1a2233;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px auto;
+  font-size: 34px;
+}
+
+.agentRole {
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.agentName {
+  color: #e8dfc8;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.agentDesc {
+  color: #8b9ab0;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 10px 0 14px;
+}
+
+.agentFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusDot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.openBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #2e3f57;
+  background: #1a2233;
+  color: #c9a227;
+}
+
+.toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 20px;
+  border-radius: 12px;
+  background: #2e3f57;
+}
+
+.toggleOn {
+  background: #1d9e75;
+}
+
+.hamburger {
   display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 99;
 }
 
-SUPPRIMER CE BLOC ET REMPLACER PAR :
+@media (max-width: 768px) {
+  .dash {
+    display: block;
+  }
 
-.overlay {
-  display: none;
-}
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-110%);
+    width: 210px;
+    z-index: 999;
+  }
 
-.overlayActive {
-  display: block;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 99;
-}
+  .sidebarOpen {
+    transform: translateX(0);
+  }
 
-==================================================
-3. SUPPRIMER LE DISPLAY BLOCK MOBILE
-==================================================
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid #1e2533;
+    background: #111820;
+    color: white;
+    font-size: 22px;
+    margin-right: 12px;
+  }
 
-Dans le fichier CSS :
+  .topBar {
+    align-items: center;
+    gap: 10px;
+  }
 
-CTRL + F
+  .btnNew,
+  .bell {
+    display: none;
+  }
 
-Rechercher :
+  .main {
+    padding: 14px;
+  }
 
-.overlay
+  .pageTitle {
+    font-size: 20px;
+  }
 
-Dans la partie :
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 
-@media (max-width: 768px)
+  .agentsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 
-SI TU VOIS :
+  .agentCard {
+    padding: 12px;
+  }
 
-.overlay {
-  display: block;
-}
+  .agentAvatar {
+    width: 54px;
+    height: 54px;
+    font-size: 24px;
+  }
 
-SUPPRIME COMPLÈTEMENT CE BLOC.
+  .agentName {
+    font-size: 15px;
+  }
 
-IMPORTANT :
-C’est cette ligne qui rend tout noir sur téléphone.
+  .agentDesc {
+    font-size: 10px;
+  }
 
-==================================================
-4. VÉRIFIER LE JS MOBILE
-==================================================
-
-Ouvrir :
-
-notepad app\page.js
-
-VÉRIFIER QUE TU AS :
-
-const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-==================================================
-5. VÉRIFIER L’OVERLAY DANS LE JSX
-==================================================
-
-TU DOIS AVOIR :
-
-<div
-  className={mobileMenuOpen ? styles.overlayActive : styles.overlay}
-  onClick={() => setMobileMenuOpen(false)}
-></div>
-
-==================================================
-6. VÉRIFIER LA SIDEBAR MOBILE
-==================================================
-
-TU DOIS AVOIR :
-
-<aside
-  className={`${styles.sidebar} ${
-    mobileMenuOpen ? styles.sidebarOpen : ""
-  }`}
->
-
-==================================================
-7. VÉRIFIER LE BOUTON HAMBURGER
-==================================================
-
-TU DOIS AVOIR :
-
-<button
-  className={styles.hamburger}
-  onClick={() => setMobileMenuOpen(true)}
-  aria-label="Ouvrir le menu"
->
-  ☰
-</button>
-
-==================================================
-8. SAUVEGARDER
-==================================================
-
-CTRL + S
-
-Fermer Notepad.
-
-==================================================
-9. VÉRIFIER QUE GIT DÉTECTE LA MODIFICATION
-==================================================
-
-Dans le terminal :
-
-git status
-
-TU DOIS VOIR :
-
-modified: app/page.module.css
-
-==================================================
-10. PUSH FINAL
-==================================================
-
-git add .
-git commit -m "fix mobile overlay final"
-git push
-
-==================================================
-11. TEST FINAL
-==================================================
-
-Ouvrir le site avec cache forcé :
-
-https://athenia-git-main-adriendhermand-6104s-projects.vercel.app/?v=13
-
-OU navigation privée.
-
-==================================================
-RÉSULTAT ATTENDU
-==================================================
-
-✅ plus d’écran noir
-✅ sidebar cachée au départ
-✅ hamburger visible
-✅ ouverture sidebar au clic
-✅ overlay uniquement menu ouvert
-✅ fermeture au clic extérieur
-✅ dashboard entièrement utilisable mobile
-✅ responsive propre
-✅ 2 colonnes correctes
-
-.overlay,
-.overlayActive {
-  display: none !important;
-  pointer-events: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
+  .openBtn {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
 }
