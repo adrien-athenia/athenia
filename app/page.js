@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { agents } from "@/lib/agents";
@@ -35,13 +36,12 @@ export default function Home() {
     setActiveAgents((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div className={styles.dash}>
-      <div
-        className={mobileMenuOpen ? styles.overlayActive : styles.overlay}
-        onClick={() => setMobileMenuOpen(false)}
-      />
-
       <aside
         className={`${styles.sidebar} ${
           mobileMenuOpen ? styles.sidebarOpen : ""
@@ -60,6 +60,7 @@ export default function Home() {
               className={`${styles.navItem} ${
                 item.active ? styles.active : ""
               }`}
+              onClick={closeMobileMenu}
             >
               <span>{item.icon}</span>
               {item.label}
@@ -81,7 +82,7 @@ export default function Home() {
         <div className={styles.topBar}>
           <button
             className={styles.hamburger}
-            onClick={() => setMobileMenuOpen(true)}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Ouvrir le menu"
           >
             ☰
@@ -97,6 +98,7 @@ export default function Home() {
           <div className={styles.topRight}>
             <button className={styles.btnNew}>+ Créer un nouvel agent</button>
             <div className={styles.bell}>🔔</div>
+
             <div className={styles.userChip}>
               <div className={styles.avatar}>AC</div>
               <div>
