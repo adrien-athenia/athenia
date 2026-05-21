@@ -170,3 +170,11 @@ RÉSULTAT ATTENDU
 ✅ dashboard entièrement utilisable mobile
 ✅ responsive propre
 ✅ 2 colonnes correctes
+
+.overlay,
+.overlayActive {
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
