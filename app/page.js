@@ -13,18 +13,19 @@ const stats = [
 ];
 
 const navItems = [
-  { icon: "🏠", label: "Accueil" },
-  { icon: "🤖", label: "Mes Agents", active: true },
-  { icon: "✅", label: "Tâches" },
-  { icon: "📊", label: "Statistiques" },
-  { icon: "🔄", label: "Automatisations" },
-  { icon: "🗄️", label: "Données" },
-  { icon: "⚙️", label: "Paramètres" },
+  { icon: "🏠", label: "Accueil", route: "/" },
+  { icon: "🤖", label: "Mes Agents", route: "/", active: true },
+  { icon: "✅", label: "Tâches", soon: true },
+  { icon: "📊", label: "Statistiques", soon: true },
+  { icon: "🔄", label: "Automatisations", soon: true },
+
+  { icon: "⚙️", label: "Paramètres", soon: true },
 ];
 
 export default function Home() {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState("Mes Agents");
   const [activeAgents, setActiveAgents] = useState(
     Object.fromEntries(agents.map((a) => [a.id, true]))
   );
@@ -36,36 +37,41 @@ export default function Home() {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  const handleNav = (item) => {
+    closeMobileMenu();
+    if (item.soon) {
+      alert(`"${item.label}" — bientôt disponible !`);
+      return;
+    }
+    setActiveNav(item.label);
+    router.push(item.route);
+  };
+
   return (
     <div className={styles.dash}>
-
-      {/* Overlay sombre derrière le menu mobile */}
       <div
         className={`${styles.overlay} ${mobileMenuOpen ? styles.overlayActive : ""}`}
         onClick={closeMobileMenu}
       />
 
-      <aside
-        className={`${styles.sidebar} ${mobileMenuOpen ? styles.sidebarOpen : ""}`}
-      >
+      <aside className={`${styles.sidebar} ${mobileMenuOpen ? styles.sidebarOpen : ""}`}>
         <div className={styles.logoArea}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo-athenia-luxe.png"
-            alt="Athenia"
-            className={styles.logoImg}
-          />
+          <img src="/logo-athenia-luxe.png" alt="Athenia" className={styles.logoImg} />
         </div>
 
         <nav className={styles.nav}>
           {navItems.map((item) => (
             <div
               key={item.label}
-              className={`${styles.navItem} ${item.active ? styles.active : ""}`}
-              onClick={closeMobileMenu}
+              className={`${styles.navItem} ${activeNav === item.label ? styles.active : ""}`}
+              onClick={() => handleNav(item)}
             >
               <span>{item.icon}</span>
               {item.label}
+              {item.soon && (
+                <span className={styles.soonBadge}>bientôt</span>
+              )}
             </div>
           ))}
         </nav>
@@ -148,7 +154,15 @@ export default function Home() {
                     {activeAgents[agent.id] ? "En ligne" : "Hors ligne"}
                   </span>
                 </div>
-                <button className={styles.openBtn}>Ouvrir →</button>
+                <button
+                  className={styles.openBtn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/agent/${agent.id}`);
+                  }}
+                >
+                  Ouvrir →
+                </button>
               </div>
             </div>
           ))}
