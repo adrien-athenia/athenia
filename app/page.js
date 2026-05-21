@@ -14,12 +14,11 @@ const stats = [
 
 const navItems = [
   { icon: "🏠", label: "Accueil", route: "/" },
-  { icon: "🤖", label: "Mes Agents", route: "/", active: true },
-  { icon: "✅", label: "Tâches", soon: true },
-  { icon: "📊", label: "Statistiques", soon: true },
-  { icon: "🔄", label: "Automatisations", soon: true },
-
-  { icon: "⚙️", label: "Paramètres", soon: true },
+  { icon: "🤖", label: "Mes Agents", route: "/" },
+  { icon: "✅", label: "Tâches", route: "/taches" },
+  { icon: "📊", label: "Statistiques", route: "/statistiques" },
+  { icon: "🔄", label: "Automatisations", route: "/automatisations" },
+  { icon: "⚙️", label: "Paramètres", route: "/parametres" },
 ];
 
 export default function Home() {
@@ -39,10 +38,6 @@ export default function Home() {
 
   const handleNav = (item) => {
     closeMobileMenu();
-    if (item.soon) {
-      alert(`"${item.label}" — bientôt disponible !`);
-      return;
-    }
     setActiveNav(item.label);
     router.push(item.route);
   };
@@ -69,9 +64,6 @@ export default function Home() {
             >
               <span>{item.icon}</span>
               {item.label}
-              {item.soon && (
-                <span className={styles.soonBadge}>bientôt</span>
-              )}
             </div>
           ))}
         </nav>
