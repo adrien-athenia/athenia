@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { agents } from "@/lib/agents";
 import styles from "./page.module.css";
 
@@ -49,10 +50,14 @@ export default function Home() {
         className={`${styles.sidebar} ${mobileMenuOpen ? styles.sidebarOpen : ""}`}
       >
         <div className={styles.logoArea}>
-          {/* Logo Athénia — remplace l'emoji par une <img> si tu as un fichier logo */}
-          <div className={styles.logoIcon}>⚔️</div>
-          <div className={styles.logoName}>ATHENIA</div>
-          <div className={styles.logoSub}>Automatisation</div>
+          <Image
+            src="/logo-athenia-luxe.png"
+            alt="Athenia"
+            width={120}
+            height={120}
+            className={styles.logoImg}
+            priority
+          />
         </div>
 
         <nav className={styles.nav}>
@@ -80,7 +85,6 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.topBar}>
-          {/* Hamburger visible uniquement mobile */}
           <button
             className={styles.hamburger}
             onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -131,14 +135,12 @@ export default function Home() {
                 className={`${styles.toggle} ${activeAgents[agent.id] ? styles.toggleOn : ""}`}
                 onClick={(e) => toggleAgent(agent.id, e)}
               />
-
               <div className={styles.agentAvatar}>{agent.emoji}</div>
               <div className={styles.agentRole} style={{ color: agent.color }}>
                 {agent.role}
               </div>
               <div className={styles.agentName}>{agent.name}</div>
               <div className={styles.agentDesc}>{agent.desc}</div>
-
               <div className={styles.agentFooter}>
                 <div className={styles.statusDot}>
                   <div
