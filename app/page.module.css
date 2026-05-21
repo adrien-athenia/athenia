@@ -9,24 +9,38 @@
     width: 210px;
   }
 
-  .sidebarOpen {
-    left: 0 !important;
-  }
-
+  .sidebarOpen { left: 0 !important; }
   .overlay { display: block; }
   .hamburger { display: block; }
   .btnNew { display: none; }
   .bell { display: none; }
+  .main { padding: 12px; width: 100%; }
 
-  .statsGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .statCard { padding: 12px; gap: 10px; }
-  .statNum { font-size: 18px; }
+  .statsGrid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
 
-  .agentsGrid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .agentCard { padding: 14px; }
-  .agentAvatar { width: 56px; height: 56px; font-size: 26px; }
-  .agentName { font-size: 17px; }
-  .agentDesc { font-size: 10px; }
+  .statCard { padding: 10px; gap: 8px; }
+  .statIcon { width: 30px; height: 30px; font-size: 14px; }
+  .statNum { font-size: 16px; }
+  .statLabel { font-size: 9px; }
+  .statSub { font-size: 9px; }
 
-  .main { padding: 16px; width: 100%; }
+  .agentsGrid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px;
+  }
+
+  .agentCard { padding: 12px; }
+  .agentAvatar { width: 50px; height: 50px; font-size: 22px; margin: 6px 0 8px; }
+  .agentRole { font-size: 8px; }
+  .agentName { font-size: 15px; margin-bottom: 4px; }
+  .agentDesc { font-size: 9px; margin-bottom: 8px; }
+  .openBtn { padding: 4px 8px; font-size: 10px; }
+  .pageTitle { font-size: 18px; }
+  .pageSub { font-size: 11px; }
 }
