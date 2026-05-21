@@ -1,138 +1,127 @@
-.dash {
-  display: flex;
-  min-height: 100vh;
-  background: #0d1117;
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { agents } from "@/lib/agents";
+import styles from "./page.module.css";
+
+const stats = [
+  { icon: "🤖", num: "8", label: "Agents actifs", sub: "● En ligne" },
+  { icon: "📈", num: "247", label: "Tâches aujourd'hui", sub: "+12% vs hier" },
+  { icon: "⏱", num: "128h", label: "Temps gagné", sub: "ce mois-ci" },
+  { icon: "✅", num: "96%", label: "Taux de réussite", sub: "des tâches" },
+];
+
+const navItems = [
+  { icon: "🏠", label: "Accueil" },
+  { icon: "🤖", label: "Mes Agents", active: true },
+  { icon: "✅", label: "Tâches" },
+  { icon: "📊", label: "Statistiques" },
+  { icon: "🔄", label: "Automatisations" },
+  { icon: "🗄️", label: "Données" },
+  { icon: "⚙️", label: "Paramètres" },
+];
+
+export default function Home() {
+  const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeAgents, setActiveAgents] = useState(
+    Object.fromEntries(agents.map((a) => [a.id, true]))
+  );
+
+  const toggleAgent = (id, e) => {
+    e.stopPropagation();
+    setActiveAgents((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  return (
+    <div className={styles.dash}>
+      {/* Overlay menu mobile */}
+      {menuOpen && (
+        <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`${styles.sidebar} ${menuOpen ? styles.sidebarOpen : ""}`}>
+        <div className={styles.logoArea}>
+          <div className={styles.logoIcon}>⚔️</div>
+          <div className={styles.logoName}>ATHENIA</div>
+          <div className={styles.logoSub}>Automatisation</div>
+        </div>
+        <nav className={styles.nav}>
+          {navItems.map((item) => (
+            <div key={item.label} className={`${styles.navItem} ${item.active ? styles.active : ""}`}
+              onClick={() => setMenuOpen(false)}>
+              <span>{item.icon}</span>{item.label}
+            </div>
+          ))}
+        </nav>
+        <div className={styles.turboBox}>
+          <div className={styles.turboLabel}>Passez en mode</div>
+          <div className={styles.turboTitle}>TURBO 🚀</div>
+          <div className={styles.turboDesc}>Débloquez des agents avancés et des options premium.</div>
+          <button className={styles.turboBtn}>Découvrir</button>
+        </div>
+      </aside>
+
+      {/* Main */}
+      <main className={styles.main}>
+        {/* Top bar */}
+        <div className={styles.topBar}>
+          <button className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>☰</button>
+          <div>
+            <h1 className={styles.pageTitle}>Mes Agents IA</h1>
+            <p className={styles.pageSub}>Pilotez votre équipe d'agents intelligents</p>
+          </div>
+          <div className={styles.topRight}>
+            <button className={styles.btnNew}>+ Créer un agent</button>
+            <div className={styles.userChip}>
+              <div className={styles.avatar}>AC</div>
+              <div>
+                <div className={styles.userName}>Alice</div>
+                <div className={styles.userRole}>Manager</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className={styles.statsGrid}>
+          {stats.map((s) => (
+            <div key={s.label} className={styles.statCard}>
+              <div className={styles.statIcon}>{s.icon}</div>
+              <div>
+                <div className={styles.statNum}>{s.num}</div>
+                <div className={styles.statLabel}>{s.label}</div>
+                <div className={styles.statSub}>{s.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Agents */}
+        <div className={styles.agentsGrid}>
+          {agents.map((agent) => (
+            <div key={agent.id} className={styles.agentCard}
+              onClick={() => router.push(`/agent/${agent.id}`)}>
+              <div className={`${styles.toggle} ${activeAgents[agent.id] ? styles.toggleOn : ""}`}
+                onClick={(e) => toggleAgent(agent.id, e)} />
+              <div className={styles.agentAvatar}>{agent.emoji}</div>
+              <div className={styles.agentRole} style={{ color: agent.color }}>{agent.role}</div>
+              <div className={styles.agentName}>{agent.name}</div>
+              <div className={styles.agentDesc}>{agent.desc}</div>
+              <div className={styles.agentFooter}>
+                <div className={styles.statusDot}>
+                  <div className={styles.dot} style={{ background: activeAgents[agent.id] ? "#1d9e75" : "#555" }} />
+                  <span style={{ color: activeAgents[agent.id] ? "#1d9e75" : "#555" }}>
+                    {activeAgents[agent.id] ? "En ligne" : "Hors ligne"}
+                  </span>
+                </div>
+                <button className={styles.openBtn}>Ouvrir →</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
 }
-
-.sidebar {
-  width: 210px;
-  background: #0a0e14;
-  border-right: 1px solid #1e2533;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  z-index: 100;
-}
-
-.logoArea {
-  padding: 24px 16px 20px;
-  border-bottom: 1px solid #1e2533;
-  text-align: center;
-}
-
-.logoIcon { font-size: 28px; margin-bottom: 6px; }
-
-.logoName {
-  font-family: 'Cinzel', serif;
-  font-size: 14px;
-  letter-spacing: 3px;
-  color: #c9a227;
-  font-weight: 600;
-}
-
-.logoSub {
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: #8b7a5a;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-
-.nav { padding: 12px 0; flex: 1; }
-
-.navItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  font-size: 13px;
-  color: #8b9ab0;
-  cursor: pointer;
-  border-left: 3px solid transparent;
-  transition: all 0.2s;
-}
-
-.navItem:hover { color: #e8dfc8; background: #111820; }
-.navItem.active { color: #c9a227; background: #141c28; border-left-color: #c9a227; }
-
-.turboBox {
-  margin: 12px;
-  background: #12100a;
-  border: 1px solid #3d2f10;
-  border-radius: 10px;
-  padding: 14px;
-}
-
-.turboLabel { font-size: 10px; color: #8b7a5a; margin-bottom: 2px; }
-.turboTitle { font-size: 16px; font-weight: 700; color: #c9a227; }
-.turboDesc { font-size: 10px; color: #8b7a5a; margin: 8px 0; line-height: 1.5; }
-
-.turboBtn {
-  width: 100%;
-  padding: 8px;
-  background: #c9a227;
-  color: #0a0e14;
-  border: none;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.main { flex: 1; padding: 28px; overflow-y: auto; }
-
-.topBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  gap: 12px;
-}
-
-.pageTitle { font-size: 24px; font-weight: 600; color: #e8dfc8; }
-.pageSub { font-size: 12px; color: #6b7a8d; margin-top: 4px; }
-
-.topRight { display: flex; align-items: center; gap: 12px; }
-
-.btnNew {
-  padding: 8px 18px;
-  border: 1px solid #c9a227;
-  background: transparent;
-  color: #c9a227;
-  border-radius: 20px;
-  font-size: 12px;
-  transition: background 0.2s;
-  white-space: nowrap;
-}
-.btnNew:hover { background: #c9a22718; }
-
-.bell {
-  width: 34px; height: 34px;
-  border: 1px solid #1e2533;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.userChip {
-  display: flex; align-items: center; gap: 8px;
-  background: #111820;
-  border: 1px solid #1e2533;
-  border-radius: 20px;
-  padding: 4px 12px 4px 6px;
-}
-
-.avatar {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #c9a227, #8b6914);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; color: #0a0e14;
-}
-
-.userName { font-size: 12px; font-weight: 500; color: #e8dfc8; }
-.userRole { font-size: 9px; col
