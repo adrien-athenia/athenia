@@ -23,6 +23,7 @@ const navItems = [
 
 export default function Home() {
   const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [activeAgents, setActiveAgents] = useState(
     Object.fromEntries(agents.map((a) => [a.id, true]))
   );
@@ -34,8 +35,13 @@ export default function Home() {
 
   return (
     <div className={styles.dash}>
+      {/* Overlay menu mobile */}
+      {menuOpen && (
+        <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
+      )}
+
       {/* Sidebar */}
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${menuOpen ? styles.sidebarOpen : ""}`}>
         <div className={styles.logoArea}>
           <div className={styles.logoIcon}>⚔️</div>
           <div className={styles.logoName}>ATHENIA</div>
@@ -43,9 +49,9 @@ export default function Home() {
         </div>
         <nav className={styles.nav}>
           {navItems.map((item) => (
-            <div key={item.label} className={`${styles.navItem} ${item.active ? styles.active : ""}`}>
-              <span>{item.icon}</span>
-              {item.label}
+            <div key={item.label} className={`${styles.navItem} ${item.active ? styles.active : ""}`}
+              onClick={() => setMenuOpen(false)}>
+              <span>{item.icon}</span>{item.label}
             </div>
           ))}
         </nav>
@@ -59,14 +65,15 @@ export default function Home() {
 
       {/* Main */}
       <main className={styles.main}>
+        {/* Top bar */}
         <div className={styles.topBar}>
+          <button className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>☰</button>
           <div>
             <h1 className={styles.pageTitle}>Mes Agents IA</h1>
             <p className={styles.pageSub}>Pilotez votre équipe d'agents intelligents</p>
           </div>
           <div className={styles.topRight}>
-            <button className={styles.btnNew}>+ Créer un nouvel agent</button>
-            <div className={styles.bell}>🔔</div>
+            <button className={styles.btnNew}>+ Créer un agent</button>
             <div className={styles.userChip}>
               <div className={styles.avatar}>AC</div>
               <div>
@@ -94,15 +101,10 @@ export default function Home() {
         {/* Agents */}
         <div className={styles.agentsGrid}>
           {agents.map((agent) => (
-            <div
-              key={agent.id}
-              className={styles.agentCard}
-              onClick={() => router.push(`/agent/${agent.id}`)}
-            >
-              <div
-                className={`${styles.toggle} ${activeAgents[agent.id] ? styles.toggleOn : ""}`}
-                onClick={(e) => toggleAgent(agent.id, e)}
-              />
+            <div key={agent.id} className={styles.agentCard}
+              onClick={() => router.push(`/agent/${agent.id}`)}>
+              <div className={`${styles.toggle} ${activeAgents[agent.id] ? styles.toggleOn : ""}`}
+                onClick={(e) => toggleAgent(agent.id, e)} />
               <div className={styles.agentAvatar}>{agent.emoji}</div>
               <div className={styles.agentRole} style={{ color: agent.color }}>{agent.role}</div>
               <div className={styles.agentName}>{agent.name}</div>
