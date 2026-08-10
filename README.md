@@ -10,9 +10,9 @@ npm install
 ```
 
 ### 2. Configurer ta clé API OpenAI
-Copie le fichier `.env.local.example` en `.env.local` :
+Copie le fichier `.env.example` en `.env.local` :
 ```bash
-cp .env.local.example .env.local
+cp .env.example .env.local
 ```
 Puis ouvre `.env.local` et remplace la valeur :
 ```
@@ -25,12 +25,11 @@ npm run dev
 ```
 Ouvre http://localhost:3000 dans ton navigateur.
 
-### 4. Déployer sur Vercel (gratuit)
+### 4. Déployer sur Netlify
 
-1. Crée un compte sur https://vercel.com
-2. Installe Vercel CLI : `npm i -g vercel`
-3. Dans le dossier du projet : `vercel`
-4. Dans les settings Vercel, ajoute la variable d'environnement :
+1. Connecte ce dépôt GitHub à Netlify (https://app.netlify.com)
+2. Netlify détecte automatiquement Next.js et utilise `npm run build`
+3. Dans les settings du site Netlify (Site configuration → Environment variables), ajoute :
    - **Name** : `OPENAI_API_KEY`
    - **Value** : ta clé OpenAI
 

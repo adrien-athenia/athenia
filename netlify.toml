@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20.9.0"
+
+# Le Next.js Runtime moderne de Netlify est auto-détecté à partir de
+# "next" dans package.json et gère lui-même le dossier de sortie ainsi
+# que les Functions/Edge Functions pour les routes serveur (ex: /api/chat).
+# Aucune déclaration explicite de plugin ni de "publish" statique n'est
+# nécessaire ici.

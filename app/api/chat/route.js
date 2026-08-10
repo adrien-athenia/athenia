@@ -1,13 +1,18 @@
 import OpenAI from "openai";
 import { getAgentById } from "@/lib/agents";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 export async function POST(req) {
   try {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return Response.json({ error: "OPENAI_API_KEY non configurée" }, { status: 500 });
+    }
+
     const { agentId, messages } = await req.json();
     const agent = getAgentById(agentId);
     if (!agent) return Response.json({ error: "Agent not found" }, { status: 404 });
+
+    const openai = new OpenAI({ apiKey });
 
     const stream = await openai.chat.completions.create({
       model: "gpt-4o",
